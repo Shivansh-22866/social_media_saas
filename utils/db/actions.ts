@@ -1,6 +1,7 @@
 import {db} from './dbConfig'
 import {eq, sql, desc} from 'drizzle-orm'
 import {Users, Subscriptions, GeneratedContent} from './schema'
+import { sendWelcomeEmail } from '../mailtrap';
 
 export async function createOrUpdateUser(
     clerkUserId: string,
@@ -25,6 +26,7 @@ export async function createOrUpdateUser(
 
         const [newUser] = await db.insert(Users).values({email,name, stripeCustomerId:clerkUserId, points:50}).returning().execute()
         console.log("New user:", newUser);
+        sendWelcomeEmail(email, name)
     }
 
     catch(err) {
