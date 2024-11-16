@@ -5,9 +5,10 @@ import { auth } from "@clerk/nextjs/server";
 import { ArrowRightIcon, CheckCircleIcon, InstagramIcon, LinkedinIcon, RocketIcon, SparklesIcon, TrendingUpIcon, TwitterIcon, ZapIcon } from "lucide-react";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
 
-  const {userId} = auth()
+  const authResult = await auth()
+  const {userId} = authResult
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-gray-100 overflow-hidden pt-20">
       <Navbar />
