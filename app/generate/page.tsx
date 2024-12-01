@@ -33,11 +33,11 @@ import {
   createOrUpdateUser,
 } from "@/utils/db/actions";
 import { TwitterMock } from "@/components/social-mocks/TwitterMock";
+import { InstagramMock } from "@/components/social-mocks/InstagramMock";
 import { LinkedInMock } from "@/components/social-mocks/LinkedInMock";
-import {InstagramMock} from '@/components/social-mocks/InstagramMock'
 import Link from "next/link";
 
-const apiKey = process.env.GEMINI_API_KEY;
+const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
 
 const contentTypes = [
@@ -85,7 +85,7 @@ export default function GenerateContent() {
       fetchUserPoints();
       fetchContentHistory();
     }
-  }, [isLoaded, isSignedIn, user, router]);
+  });
 
   const fetchUserPoints = async () => {
     if (user?.id) {
